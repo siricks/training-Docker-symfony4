@@ -33,3 +33,9 @@ U can see
 Go to repo folder and:
 
 `docker-compose up`
+
+To use symfony commands in docker u need use 
+`docker-compose exec`
+
+example:
+`docker-compose exec php bin/console doctrine:fixtures:load`
