@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}All leaders{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{% trans %}All leaders{% endtrans %}</h1>
+        <div class="card-columns">
+            {% for leader in leaders %}
+
+                <div class="card">
+                    <img src="{{ asset('images/leaders/' ~ leader.image) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ leader.name }}</h5>
+                        <p class="card-text">{{ leader.country }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {% if leader.games|length > 0 %}
+                                    {% trans %}Number of games{% endtrans %}: {{ leader.games|length }}
+                                {% endif %}
+                            </small>
+
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('leader_show', {'id': leader.id}) }}">{% trans %}show{% endtrans %}</a>
+                        <a href="{{ path('leader_edit', {'id': leader.id}) }}">{% trans %}edit{% endtrans %}</a>
+                    </div>
+                </div>
+            {% else %}
+                no records found
+            {% endfor %}
+
+        </div>
+        <a href="{{ path('leader_new') }}">{% trans %}Create new{% endtrans %}</a>
+    </div>
+{% endblock %}
